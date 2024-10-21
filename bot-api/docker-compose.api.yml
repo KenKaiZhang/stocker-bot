@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  botapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - bot-network
+
+networks:
+  bot-network:
+    external: true
