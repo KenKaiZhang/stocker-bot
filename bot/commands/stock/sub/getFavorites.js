@@ -18,7 +18,7 @@ const execute = async(interaction) => {
 
         prices.forEach((price) => {
             embed.addFields({
-                name: `${price.name}`,
+                name: `${price.name} (${price.ticker})`,
                 value: `**${price.price}** ${price.change} ${price.change_percent}`
             });
         });

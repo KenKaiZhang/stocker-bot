@@ -19,15 +19,19 @@ const execute = async(interaction) => {
     await interaction.deferReply()
     const ticker = interaction.options.getString("ticker").toUpperCase()
 
-    const { name, logo } = await fetchCompanyProfile(ticker)
+    const { logo } = await fetchCompanyProfile(ticker)
     const price = await fetchTickerPrice(ticker)
 
     const embed = new EmbedBuilder()
 
     embed
         .setColor(price.positive ? 0x1bdb44 : 0xe31b1b)
-        .setTitle(`${name} (${ticker})`)
-        .setDescription(`**${price.price}** ${price.change} ${price.change_percent}`)
+        .setTitle(`${price.name} (${ticker})`)
+        .addFields(
+            { name: "Current Price", value: `**${price.price}**`, inline: true},
+            { name: "Price Change", value: `${price.change}`, inline: true},
+            { name: "Price Change %", value: `${price.change_percent}`, inline: true}
+        )
         .setThumbnail(logo)
         .setTimestamp()
     await interaction.editReply({ embeds: [embed], fetchReply: true })

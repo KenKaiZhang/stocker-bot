@@ -18,8 +18,10 @@ const execute = async(interaction) => {
     
     const savedTickers = await saveTickers(guild, { tickers: tickersList })
 
-    await interaction.reply(`${savedTickers.join(", ")} have been saved to favorites.`)
-
+    if (savedTickers.length === 0)
+        await interaction.reply("No new tickers saved to favorites.")
+    else
+        await interaction.reply(`${savedTickers.join(", ")} have been saved to favorites.`)
 }
 
 export { data, execute }

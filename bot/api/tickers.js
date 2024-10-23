@@ -20,8 +20,8 @@ export const saveTickers = async(guild, tickers) => {
     return data
 }
 
-export const removeFavoriteTickers = async(tickers) => {
-    const url = `${BASE_URL}tickers/favorites`
+export const removeFavoriteTickers = async(guild, tickers) => {
+    const url = `${BASE_URL}tickers/favorites/${guild}`
     const { data } = await axios.put(url, tickers)
     return data
 }
